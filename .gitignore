@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+.venv/
+
+# Environment Variables
+.env
+
+# IDE
+.idea/
+
+# Logs
+logs/
+
+# User Memory
+data/memory.json
+
+# Screenshots
+Screenshots/
+
+# OS Files
+.DS_Store
+Thumbs.db
