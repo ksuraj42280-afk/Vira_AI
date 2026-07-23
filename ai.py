@@ -5,6 +5,9 @@ from memory import save_memory, get_memory
 from jarvis_conversation import add, get
 
 
+# -------------------------
+# Main AI Chat
+# -------------------------
 def ask_ai(prompt):
 
     text = prompt.lower().strip()
@@ -36,16 +39,15 @@ def ask_ai(prompt):
         name = get_memory("name")
 
         if name:
-            return f"Your name is {name}."
+            return f"Your name is {name}"
         else:
             return "I don't know your name yet."
 
     # -------------------------
-    # AI Chat (Ollama + Conversation Memory)
+    # Ollama Chat
     # -------------------------
     try:
 
-        # User message history me save karo
         add("user", prompt)
 
         messages = [
@@ -54,12 +56,11 @@ def ask_ai(prompt):
                 "content": (
                     "You are JARVIS, a helpful personal AI assistant. "
                     "Your creator is Suraj. "
-                    "Keep your answers short, clear, and friendly."
+                    "Keep your answers short, clear and friendly."
                 ),
             }
         ]
 
-        # Previous conversation add karo
         messages.extend(get())
 
         response = ollama.chat(
@@ -69,7 +70,6 @@ def ask_ai(prompt):
 
         reply = response["message"]["content"]
 
-        # Assistant response bhi save karo
         add("assistant", reply)
 
         return reply
@@ -80,7 +80,7 @@ def ask_ai(prompt):
 
 
 # -------------------------
-# Web Search Summary
+# Summarize Web Results
 # -------------------------
 def summarize_web(query, web_text):
 
@@ -114,3 +114,38 @@ def summarize_web(query, web_text):
     except Exception as e:
 
         return f"Summary Error: {e}"
+
+
+# -------------------------
+# Hybrid AI
+# Decide whether Internet is needed
+# -------------------------
+def needs_internet(prompt):
+
+    prompt = prompt.lower().strip()
+
+    keywords = [
+        "latest",
+        "today",
+        "news",
+        "current",
+        "recent",
+        "live",
+        "weather",
+        "temperature",
+        "forecast",
+        "score",
+        "match",
+        "ipl",
+        "cricket",
+        "football",
+        "stock",
+        "share price",
+        "bitcoin",
+        "crypto",
+        "gold price",
+        "election",
+        "breaking",
+    ]
+
+    return any(keyword in prompt for keyword in keywords)

@@ -5,6 +5,8 @@ from calculator import calculate
 from ai import (
     ask_ai,
     summarize_web,
+    needs_internet,
+
 )
 
 from internet import get_web_text
@@ -140,13 +142,20 @@ def process(command):
         reply = take_screenshot()
 
     # -------------------------
-    # AI
+    # AI / Hybrid AI
     # -------------------------
     else:
 
-        reply = ask_ai(command)
+        if needs_internet(command):
 
-    # Log Jarvis Response
-    log("JARVIS", reply)
+            web_results = get_web_text(command)
 
-    return reply
+            reply = summarize_web(command, web_results)
+
+        else:
+
+            reply = ask_ai(command)
+            # Log Jarvis Response
+            log("JARVIS", reply)
+
+            return reply
