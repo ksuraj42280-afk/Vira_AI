@@ -1,11 +1,3 @@
-from internet import search
+from internet import get_web_text
 
-print(search("Iron Man"))
-
-print()
-
-print(search("Python programming"))
-
-print()
-
-print(search("Jarvis AI"))
+print(get_web_text("Quantum Computing"))

@@ -7,7 +7,7 @@ from ai import (
     summarize_web,
 )
 
-from internet import search
+from internet import get_web_text
 
 from logger import log
 
@@ -121,7 +121,7 @@ def process(command):
 
         query = command.replace("internet ", "").strip()
 
-        web_results = search(query)
+        web_results = get_web_text(query)
 
         reply = summarize_web(query, web_results)
 
