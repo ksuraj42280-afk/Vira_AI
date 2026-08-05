@@ -15,7 +15,7 @@ USER_NAME = "Suraj"
 MAX_HISTORY = 10
 
 # Voice
-VOICE_RATE = 180
+VOICE_RATE = 180   
 VOICE_VOLUME = 1.0
 
 # Memory

@@ -17,6 +17,9 @@ from system_handler import handle as system_handler
 
 from automation_handler import handle as automation_handler
 
+from internet_handler import handle as internet_handler
+
+from ai_handler import handle as ai_handler
 
 def process(command):
 
@@ -64,12 +67,7 @@ def process(command):
     # -------------------------
     elif task == "internet":
 
-        web_results = get_web_text(command)
-
-        reply = summarize_web(
-            command,
-            web_results
-        )
+        reply = internet_handler(command)
 
 
     # -------------------------
